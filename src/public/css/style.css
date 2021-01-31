@@ -1,0 +1,15 @@
+/*  recordar que este file esta en la carpeta public la cual ya esta definida en el servidor -server.js- y estara disponible para todo la app, solo colocar en el link del html la ruta simple:  /css/style.css */
+h1,
+h2,
+h3 {
+  color: white;
+}
+
+p {
+  color: wheat;
+}
+
+/* .navbar-brand i,
+.navbar-dark .navbar-brand {
+  color: #cb9e17;
+} */
