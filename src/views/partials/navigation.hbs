@@ -20,20 +20,28 @@
       <li class="nav-item">
         <a class="nav-link" href="/about">About</a>
       </li>
+
+      {{!-- Permitir la vista si el usario esta autentificado / 'user' es la variable que guarda la sesion con passport - ver middlewares en 'server.js' --}}
+    </ul>
+    {{#if user}}
+    <ul class="navbar-nav">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Notes</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="/notes">All My Notes</a>
-          <a class="dropdown-item" href="/notes/add">Add New Note</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/users/logout">Logout</a>
-        </div>
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Notes</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/notes">All My Notes</a>
+            <a class="dropdown-item" href="/notes/add">Add New Note</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/users/logout">Logout</a>
+          </div>
       </li>
     </ul>
+    {{/if}}
 {{!--     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search">
       <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
     </form> --}}
+    {{!-- Si el usuario no esta loggeado --}}
+    {{#unless user}}
     <ul class="navbar-nav ">
       <li class="nav-item">
         <a href="/users/signin" class="nav-link"><i class="fas fa-user mr-2"></i>Login</a>
@@ -42,6 +50,8 @@
         <a href="/users/signup" class="nav-link"><i class="far fa-user mr-2"></i>Register</a>
       </li>
     </ul>
+    {{/unless}}
+  
   </div>
   </div>
 </nav>

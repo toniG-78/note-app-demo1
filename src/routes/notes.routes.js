@@ -11,23 +11,26 @@ const {
   deleteNote,
 } = require("../controllers/notes.controller");
 
-// Add New Note *************************************
-router.get("/notes/add", renderNoteForm); // renderiza la view del formulario para crear una nueva nota desde el btn de la home
+// Helpers
+const { isAuthenticated } = require("../helpers/auth_routes");
 
-router.post("/notes/new-note", createNewNote); // en la view del formulario al hacer click se envia la request de tipo Post al server para guarda la nueva nota en el database (mongo)
+// Add New Note *************************************
+router.get("/notes/add", isAuthenticated, renderNoteForm); // renderiza la view del formulario para crear una nueva nota desde el btn de la home
+
+router.post("/notes/new-note", isAuthenticated, createNewNote); // en la view del formulario al hacer click se envia la request de tipo Post al server para guarda la nueva nota en el database (mongo)
 
 // Get All Notes ************************************
-router.get("/notes", getAllNotes); // renderiza una view con todas las notas tanto como para visualizarlas asi como respuesta luego de crear una nueva nota
+router.get("/notes", isAuthenticated, getAllNotes); // renderiza una view con todas las notas tanto como para visualizarlas asi como respuesta luego de crear una nueva nota
 
 //:id ---> parametro
 
 // Edit Note ****************************************
-router.get("/notes/edit/:id", renderEditForm); // render form for edit note
+router.get("/notes/edit/:id", isAuthenticated, renderEditForm); // render form for edit note
 
-router.put("/notes/edit/:id", updateNote); // send post request and save the edited note in the database
+router.put("/notes/edit/:id", isAuthenticated, updateNote); // send post request and save the edited note in the database
 
 // Delete Note **************************************
-router.delete("/notes/delete/:id", deleteNote);
+router.delete("/notes/delete/:id", isAuthenticated, deleteNote);
 
 module.exports = router;
 

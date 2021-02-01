@@ -1,5 +1,7 @@
 const User = require("../models/User");
 
+const passport = require("passport");
+
 const usersController = {};
 
 // Renderiza el Form para el registro de usuario ***************************************************************************
@@ -51,13 +53,25 @@ usersController.renderSignInForm = (req, res) => {
 };
 
 //Envia el POST con los datos del login del usuario para comparar con el registro en la base de datos *************************
-usersController.signin = (req, res) => {
+/*  usersController.signin = (req, res) => {
+  //Using Passport * ver config folder
   res.send("user login");
-};
+};  */
+//Using Passport * ver config folder
+usersController.signin = passport.authenticate("local", {
+  failureRedirect: "/users/signin",
+  successRedirect: "/notes",
+  failureFlash: true,
+});
 
 //Log out *******************************************************
 usersController.logout = (req, res) => {
-  res.send("user log out");
+  //res.send("user log out");
+  req.logout();
+  req.flash("success_msg", "You are logged out!");
+  res.redirect("/users/signin");
 };
 
 module.exports = usersController;
+
+// Cuando renderizo las paginas debo usar la ruta completa / cuando uso 'redirect' en cambio no
