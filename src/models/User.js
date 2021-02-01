@@ -12,6 +12,7 @@ const UserSchema = new Schema(
     email: {
       type: String,
       required: true,
+      unique: true, //Para que se pueda validar el usario durante el SignUp
     },
     password: {
       type: String,
@@ -30,8 +31,8 @@ UserSchema.methods.encryptPassword = async (password) => {
 };
 
 // comparar passwords, almacenada y al loggearse
-UserSchema.methods.matchPassword = function(password) {
-  return await bcrypt.compare(password, this.password) // boolean
+UserSchema.methods.matchPassword = async function (password) {
+  return await bcrypt.compare(password, this.password); // boolean
 };
 
 module.exports = model("User", UserSchema);

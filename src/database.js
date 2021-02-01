@@ -11,6 +11,7 @@ mongoose
   .connect(MONGODB_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
+    useCreateIndex: true,
   })
   .then((db) => console.log("Database is connected"))
   .catch((err) => console.log("Database is not connected"));
@@ -31,5 +32,5 @@ mongoose
    - Mostrar los objetos o documentos de la coleccion
    db.notes.find()  o  db.notes.find().pretty()
 
-   
+   db.notes.drop() BORRA TODO!!!
   */

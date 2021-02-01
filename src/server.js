@@ -39,11 +39,12 @@ app.use(
     saveUninitialized: true,
   })
 );
-app.use(flash()); // mensajes al usuario para confirmar eventos - Necesita de 'express-session' !!!!
+app.use(flash()); // mensajes al usuario para confirmar eventos - flash-connect --- Necesita de 'express-session' !!!!
 
 // GLOBAL VARIABLES  ------------------------------------------------------------------------------------------------------
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
   // PODREMOS USAR EL VALOR DE LOS MENSAJES DE 'flash-connect' YA QUE SE HAN SALVADO COMO VARIABLES GLOBALES DEL SERVIDOR _-> res.locals.success_msg , USARLOS EN CUALQUIER VISTA POR EJEMPLO /  (ver el file de los controladores para cada mensaje)
   next();
 });
@@ -54,6 +55,7 @@ app.use((req, res, next) => {
 }); */
 app.use(require("./routes/index.routes")); // pages
 app.use(require("./routes/notes.routes")); // notes
+app.use(require("./routes/users.routes"));
 
 // STATIC FILES  -----------------------------------------------------------------------------------------------------------
 app.use(express.static(path.join(__dirname, "public")));
